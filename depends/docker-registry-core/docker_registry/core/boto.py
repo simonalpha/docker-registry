@@ -130,8 +130,14 @@ class Base(driver.Base):
         self._config = config
         self._root_path = path or '/test'
         self._boto_conn = self.makeConnection()
+        if self._config.boto_validate_bucket is not None:
+            validate = self._config.boto_validate_bucket is True
+        else:
+            # default to standard S3 behaviour
+            validate = True
         self._boto_bucket = self._boto_conn.get_bucket(
-            self._config.boto_bucket)
+            self._config.boto_bucket,
+            validate=validate)
         logger.info("Boto based storage initialized")
 
     def _build_connection_params(self):

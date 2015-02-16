@@ -89,6 +89,8 @@ s3: &s3
     boto_host: _env:AWS_HOST
     boto_port: _env:AWS_PORT
     boto_calling_format: _env:AWS_CALLING_FORMAT
+    # Optional: for use with OpenStack S3 Compatibility; true by default
+    boto_validate_bucket: _AWS_VALIDATE_BUCKET
 
 cloudfronts3: &cloudfronts3
     <<: *s3
